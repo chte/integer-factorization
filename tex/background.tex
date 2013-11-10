@@ -1,13 +1,17 @@
 As described in the scope the intention is not to find a new method of factoring integers but instead use existing methods and implement them in a intelligent way.
 
 \subsection{Trial Division}
-Trial division is an easy implemented algorithm for finding factors to N. Like its name suggests it uses tries to divide N by using a x > 2. If the remainder of N/x = 0 the factor is a non-trivial factor, if we cannot find a divisor x that gives the remainder 0 then N is a prime.
-The restrictions for the algorithm are easy to find and improve, N > 1 and x > 2. This can be improved by saying that N > x and since the factors of N cannot be larger than sqrt(N) we can also say that sqrt(N) > x > 2. Another improvement is to only do tests when x is a prime number. Although trial division is easy to implement and guaranteed to grant an answer it is not efficient for large a N.
+Trial division is an easy implemented algorithm for finding factors to $N$. Like its name suggests it uses tries to divide $N$ by using a $x > 2$. If the remainder of $N/x = 0$ the factor is a non-trivial factor, if we cannot find a divisor $x$ that gives the remainder $0$ then $N$ is a prime.
+
+The restrictions for the algorithm are easy to find and improve, $N > 1$ and $x > 2$. This can be improved by saying that $N > x$ and since the factors of N cannot be larger than $\sqrt{N}$ we can also say that $\sqrt{N} > x > 2$. Another improvement is to only do tests when $x$ is a prime number. Although trial division is easy to implement and guaranteed to grant an answer it is not efficient for large a $N$.
 
 \subsection{Pollard's Rho}
-Pollard rho is a prime factorization algorithm which is based on Floyd’s cycle-finding algorithm. The idea of pollard rho algorithm is to iterate a formula until it falls into a cycle. We want to find a x and y where the x makes twice as many iterations as the y using a function modulo N as a generator of a pseudo-random sequence. The GCD|x - y| of N is taken each step, and the GCD reaches N we have not found an answer and the algorithm terminates with a failure.
-We can write N = p * q, when x, which iterates twice as fast as y, catches up with y which will happen eventually, at this point factor p will be found. \cite{avalg}
+Pollard rho is a prime factorization algorithm which is based on Floyd’s cycle-finding algorithm. The idea of pollard rho algorithm is to iterate a formula until it falls into a cycle. We want to find a $x$ and $y$ where the $x$ makes twice as many iterations as the $y$ using a function $modulo N$ as a generator of a pseudo-random sequence. The $GCD|x - y|$ of $N$ is taken each step, and the GCD reaches $N$ we have not found an answer and the algorithm terminates with a failure.
+
+We can write $N = p * q$, when $x$, which iterates twice as fast as $y$, catches up with $y$ which will happen eventually, at this point factor $p$ will be found. The time it will take cannot be proven matematically and can only be proven by heuristics. If the sequence behaves randomly it would take approximately p steps to find p, which is not very effcient. \cite{avalg} \\
 
 \includegraphics[scale = 0.5]{pollards.png}
 
-The figure above illustrates the Pollard's Rho cycle. This method can be improved by using additional methods such as Brent's cycle finding method.
+The figure above illustrates the Pollard's Rho cycle. The mapping of $x_{i+1}$ is instead replaced with a function $x^2+1$ so that we get $x^2_{i}+1$  $mod$ $N$ the factor $p$ will be found after $O(\sqrt{p})$  $\epsilon$ $O(N^{1/4})$ steps. \cite{avalg}\\
+
+Pollard's rho algorithm can be improved further by implementing Brent's cycle finding method. \cite{brent}
