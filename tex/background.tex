@@ -6,6 +6,6 @@ The restrictions for the algorithm are easy to find and improve, N > 1 and x > 2
 
 \subsection{Pollard's Rho}
 Pollard rho is a prime factorization algorithm which is based on Floyd’s cycle-finding algorithm. The idea of pollard rho algorithm is to iterate a formula until it falls into a cycle. We want to find a x and y where the x makes twice as many iterations as the y using a function modulo N as a generator of a pseudo-random sequence. The GCD|x - y| of N is taken each step, and the GCD reaches N we have not found an answer and the algorithm terminates with a failure.
-We can write N = p * q, when x, which iterates twice as fast as y, catches up with y. This will happen eventually, the factor p will be found.
+We can write N = p * q, when x, which iterates twice as fast as y, catches up with y which will happen eventually, at this point factor p will be found.
 
 \includegraphics[scale = 0.5]{pollards.png}
