@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.10.5)  10 NOV 2013 18:34
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.10.5)  10 NOV 2013 18:58
 entering extended mode
 **C:/Users/chrite/Documents/GitHub/integer-factorization/tex/style.tex
 (C:/Users/chrite/Documents/GitHub/integer-factorization/tex/style.tex
@@ -470,13 +470,14 @@ File: ufplmbb.fd 2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
 (C:\Users\chrite\Documents\GitHub\integer-factorization\tex\qs.tex
 LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <12> not available
 (Font)              Font shape `T1/pplx/b/n' tried instead on input line 1.
-LaTeX Font Info:    Try loading font information for OMS+pplx on input line 8.
-LaTeX Font Info:    No file OMSpplx.fd. on input line 8.
+LaTeX Font Info:    Try loading font information for OMS+pplx on input line 13.
+
+LaTeX Font Info:    No file OMSpplx.fd. on input line 13.
 
 
 LaTeX Font Warning: Font shape `OMS/pplx/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbullet' on input line 8.
+(Font)              for symbol `textbullet' on input line 13.
 
 ) (C:\Users\chrite\Documents\GitHub\integer-factorization\tex\style.bbl)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 92.
@@ -495,11 +496,11 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 92.
  ) 
 Here is how much of TeX's memory you used:
- 8483 strings out of 494045
- 131379 string characters out of 3150802
- 250639 words of memory out of 3000000
+ 8500 strings out of 494045
+ 131515 string characters out of 3150802
+ 251639 words of memory out of 3000000
  11506 multiletter control sequences out of 15000+200000
- 54494 words of font info for 184 fonts, out of 3000000 for 9000
+ 55363 words of font info for 196 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  36i,10n,43p,628b,516s stack positions out of 5000i,500n,10000p,200000b,50000s
 {H:/Program/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<H:/Program/MiKTeX 2.9
@@ -510,9 +511,9 @@ cm/cmsy10.pfb><H:/Program/MiKTeX 2.9/fonts/type1/public/mathpazo/fplmbb.pfb><H:
 .9/fonts/type1/public/fpl/fplrc8a.pfb><H:/Program/MiKTeX 2.9/fonts/type1/urw/pa
 latino/uplb8a.pfb><H:/Program/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb><H
 :/Program/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on style.pdf (2 pages, 107136 bytes).
+Output written on style.pdf (2 pages, 107454 bytes).
 PDF statistics:
- 78 PDF objects out of 1000 (max. 8388607)
- 10 named destinations out of 1000 (max. 500000)
+ 79 PDF objects out of 1000 (max. 8388607)
+ 11 named destinations out of 1000 (max. 500000)
  46113 words of extra memory for PDF output out of 51595 (max. 10000000)
 
