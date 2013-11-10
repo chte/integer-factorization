@@ -8,6 +8,7 @@
 \linespread{1.05} % Palatino needs more space between lines
 \usepackage{microtype}
 \usepackage{babel}
+\usepackage{graphicx}
 
 % ------
 % Page layout
@@ -79,12 +80,17 @@
 \begin{multicols}{2}
 \section{Introduction}
 \input{intro.tex}
+\newpage
 \section{Preliminaries}
 \input{pre.tex}
+\newpage
 \section{Quadratic Sieve}
 \input{qs.tex}
+\newpage
+\section{Background}
+\input{background.tex}
 
-
+\newpage
 \bibliographystyle{plain}
 \bibliography{References}
 \end{multicols}
