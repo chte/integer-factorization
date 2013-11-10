@@ -1,0 +1,15 @@
+\begin{thebibliography}{1}
+
+\bibitem{Hardy2008}
+G.H. Hardy, E.M. Wright, D.R. Heath-Brown, and J.~Silverman.
+\newblock {\em An Introduction to the Theory of Numbers}.
+\newblock Oxford mathematics. OUP Oxford, 2008.
+
+\bibitem{Pomerance1985}
+Carl Pomerance.
+\newblock The quadratic sieve factoring algorithm.
+\newblock In Thomas Beth, Norbert Cot, and Ingemar Ingemarsson, editors, {\em
+  Advances in Cryptology}, volume 209 of {\em Lecture Notes in Computer
+  Science}, pages 169--182. Springer Berlin Heidelberg, 1985.
+
+\end{thebibliography}

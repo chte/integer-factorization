@@ -1,0 +1,21 @@
+\subsection{Brief explaination}
+The quadratic sieve algorithm is today the algorithm of choice when factoring very large composite numbers
+with no small factors. The general idea behind quadratic factoring is to find two integers $x,y \in Z$, such
+that $x^2 \equiv y^2$ and $x \not\equiv \pm y$ mod $N$. This would imply that $x^2-y^2 = (x-y) \cdot (x+y) \equiv 0$ mod $N$ and 
+that $(x-y) \cdot (x+y) = k \cdot p \cdot q$ for some integer $k$. Furthermore this can be seperated into to two possible cases.
+
+\begin{itemize}
+	\item either $p$ divides $(x-y)$ and $q$ divides $(x+y)$, or vice versa.
+	\item or both $p$ and $q$ divides $(x-y)$ and neither of them divides $(x+y)$, or vice versa.
+\end{itemize}
+
+
+Calculating $d=$gcd($x-y,N$) would then in first case yield $d = p$ or $d = q$ and a non-trivial factor of 
+$N$ is found. In the second case we get $d = N$ or $d = 1$ and trivial solution is found. In conclusion,
+there a 1/2 probability to factor $N$.
+
+Carl Pomerance suggested a method to find these two distinct integers\cite{Pomerance1985}. The first step in
+doing so is to is to define the polynomial 
+\begin{equation}
+Q(x) = (x + \myfloor{\sqrt{s}})^2-N 
+\end{equation}
