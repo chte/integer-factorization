@@ -13,3 +13,8 @@
 *.lai
 *.la
 *.a
+
+# Latex
+*.gz
+*.out
+*.aux
