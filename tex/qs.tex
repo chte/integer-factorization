@@ -1,8 +1,8 @@
 \subsection{Brief explaination}
 The quadratic sieve algorithm is today the algorithm of choice when factoring very large composite numbers
 with no small factors. The general idea behind quadratic factoring is based on Fermat's observation that
-a composite number if one can find two find two integers $x,y \in Z$, such
-that $x^2 \equiv y^2$ (mod $n$) and $x \not\equiv \pm y$ (mod $n$). This would imply that,
+a composite number $n$ can be factored if one can find two find two integers $x,y \in Z$, such
+that $x^2 \equiv x^2$ (mod $n$) and $x \not\equiv \pm y$ (mod $n$). This would imply that,
 \begin{equation}
 n \ | \ x^2-y^2 = (x-y) \cdot (x+y)
 \end{equation}
@@ -14,11 +14,36 @@ Furthermore it can be rewritten as $(x-y) \cdot (x+y) = k \cdot p \cdot q$ for s
 	\item or both $p$ and $q$ divides $(x-y)$ and neither of them divides $(x+y)$, or vice versa.
 \end{itemize}
 
-Hence, the greatest common divisor of ($x-y,n$) and ($x+y,n$) would with with a 1/2 probability yield first case which is $p$ or $q$ and a non-trivial factor of 
+Hence, the greatest common divisor of ($x-y,n$) and ($x+y,n$) would in first case yield $p$ or $q$ and a non-trivial factor of 
 $n$ is found. In the second case we get $n$ or $1$ and trivial solution is found. 
 
-Carl Pomerance suggested a method to find these tsuch squares\cite{Pomerance1985}. The first step in
-doing so is to is to define the polynomial 
+Carl Pomerance suggested a method to find such squares\cite{Pomerance1985}. The first step in doing so is to is to define the polynomial 
 \begin{equation}
-Q(x) = (x + \myfloor{\sqrt{s}})^2-N 
+q(x) = (x + \myfloor{\sqrt{n}})^2-n 
 \end{equation}
+One might realize that this satisfies the relation $(x + \myfloor{\sqrt{n}})^2 \equiv q(x) \ (\textrm{mod} \ n)$.
+
+Now, consider we have integers $x_1, x_2, \ldots, x_k$ for which so that the product $q(x_1) \cdot q(x_1) \cdot \ldots \cdot q(x_n)$
+is a perfect square, and call it $y^2$. Then if we let $x = (x_1 + \myfloor{\sqrt{n}})\cdot(x_2 + \myfloor{\sqrt{n}})\ldots(x_k + \myfloor{\sqrt{n}})$
+we have a solution $x^2 \equiv y^2$ that satisfies equation (1).
+
+To find such $x$'s we must realize that we if a prime $p$ divides $q(x_i)$ then $(x_1 + \myfloor{\sqrt{n}})^2 \equiv n$ (mod $p$).
+Hence, $n$ is a quadratic residue modulo $p$ and we only need to consider those primes. Thus the set of primes $p_i$ for which the Legendre symbol $(\frac{n}{p_i})$ is 1. This set of primes is a tool for factoring which we will further on referr as $factor \ base$.
+
+Lets consider a factor base $P$ with the primes $p_1, p_2, ..., p_k$ that is $k \leq B$ and coprime to $n$.
+We want to find small $x_i$ so that $q(x_i)$ is smooth in respect to $P$. If we find such $x$'s we say that $q(x_i) = (x + \myfloor{\sqrt{n}})^2-n$
+is B-smooth and we can factor $y^2$ completely over the factor base.
+
+A prime factorization $p_1^{a_1} \cdot p_2^{a_2} \cdot \ldots \cdot p_k^{a_{\pi(B)}}$ of a B-smooth number $v$ can then be expressed as,
+we can express as a exponent vector $e(v) = (a_1, a_2, \ldots, a_{\pi(B)})$ and we arrive at following formula.
+
+\begin{equation}
+y^2 \equiv \prod_{i=1}^{\pi(B)} p_i^{e_i{v}}
+\end{equation}
+
+Then the product of subsequence of $v$ i.e. $q(x_1) \cdot q(x_2) \cdot \ldots \cdot q(x_k)$ produced a 
+square $iff$ the exponent vectors has only even entries. The linear combinations producing 
+a perfect square can the be solved with Gaussian Eliminations modulo 2 if the exponent vectors
+is represented as the rows of a matrix. Thus, the column sums must be even.
+
+\subsection{Brief explaination}
