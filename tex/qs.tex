@@ -19,31 +19,51 @@ $n$ is found. In the second case we get $n$ or $1$ and trivial solution is found
 
 Carl Pomerance suggested a method to find such squares\cite{Pomerance1985}. The first step in doing so is to is to define the polynomial 
 \begin{equation}
-q(x) = (x + \myfloor{\sqrt{n}})^2-n 
+q(r) = (r + \myfloor{\sqrt{n}})^2-n \approx \tilde{r}^2-n
 \end{equation}
-One might realize that this satisfies the relation $(x + \myfloor{\sqrt{n}})^2 \equiv q(x) \ (\textrm{mod} \ n)$.
-
-Now, consider we have integers $x_1, x_2, \ldots, x_k$ for which so that the product $q(x_1) \cdot q(x_1) \cdot \ldots \cdot q(x_n)$
-is a perfect square, and call it $y^2$. Then if we let $x = (x_1 + \myfloor{\sqrt{n}})\cdot(x_2 + \myfloor{\sqrt{n}})\ldots(x_k + \myfloor{\sqrt{n}})$
-we have a solution $x^2 \equiv y^2$ that satisfies equation (1).
-
-To find such $x$'s we must realize that we if a prime $p$ divides $q(x_i)$ then $(x_1 + \myfloor{\sqrt{n}})^2 \equiv n$ (mod $p$).
-Hence, $n$ is a quadratic residue modulo $p$ and we only need to consider those primes. Thus the set of primes $p_i$ for which the Legendre symbol $(\frac{n}{p_i})$ is 1. This set of primes is a tool for factoring which we will further on referr as $factor \ base$.
-
-Lets consider a factor base $P$ with the primes $p_1, p_2, ..., p_k$ that is $k \leq B$ and coprime to $n$.
-We want to find small $x_i$ so that $q(x_i)$ is smooth in respect to $P$. If we find such $x$'s we say that $q(x_i) = (x + \myfloor{\sqrt{n}})^2-n$
-is B-smooth and we can factor $y^2$ completely over the factor base.
-
-A prime factorization $p_1^{a_1} \cdot p_2^{a_2} \cdot \ldots \cdot p_k^{a_{\pi(B)}}$ of a B-smooth number $v$ can then be expressed as,
-we can express as a exponent vector $e(v) = (a_1, a_2, \ldots, a_{\pi(B)})$ and we arrive at following formula.
+Now, consider we set of primes $P = \{ p_1, p_2, ..., p_k \}$ lesser than a bound $B$, i.e $k < \pi(B)$. We then want to construct a subset of integers  $r_1, r_2, \ldots, r_k$ such that $\forall i : q(r_i) = r_i^2-n$ (mod $n$) is smooth in respect to $P$, more specifically $\forall i$ :
 
 \begin{equation}
-y^2 \equiv \prod_{i=1}^{\pi(B)} p_i^{e_i{v}}
+ q(r_i) = r_i^2 \equiv p_1^{e_{i1}} \cdot \ldots \cdot p_k^{e_{i\pi(B)}} \ (\texttt{mod} \ n)
 \end{equation}
 
-Then the product of subsequence of $v$ i.e. $q(x_1) \cdot q(x_2) \cdot \ldots \cdot q(x_k)$ produced a 
-square $iff$ the exponent vectors has only even entries. The linear combinations producing 
-a perfect square can the be solved with Gaussian Eliminations modulo 2 if the exponent vectors
-is represented as the rows of a matrix. Thus, the column sums must be even.
+where $e_{ij}$ is the exponent of $p_j$ of factorization of $q(r_i)$. If the exponents for all primes sums to
+an even number we arrove at following relation:
 
-\subsection{Brief explaination}
+\begin{equation}
+ \prod_{i=1}^{n} q(r_i) = \prod_{i=1}^{n} r_i^2 \equiv (p_1^{e_{1}} \cdot \ldots \cdot p_k^{\pi(B)})^2 \ (\texttt{mod} \ n)
+\end{equation}
+
+and the integers we $x$, $y$ we sought to find are simply:
+
+\begin{equation}
+ x = \prod_{i=1}^{n} q(r_i)
+\end{equation}
+
+\begin{equation}
+y = \prod_{i=1}^{\pi(B)} p_1^{e_{i}}
+\end{equation}
+
+Lets consider a factor base $P$ with the primes $p_1, p_2, ..., p_k$ that is $k \geq B$ and coprime to $n$.
+We want to search for small $r_i$ so that $q(r_i)$ is smooth in respect to $P$. If we find such $r$'s we say that $q(r_i) = (r + \myfloor{\sqrt{n}})^2-n$ is B-smooth and we can factor completely over the factor base.
+
+A prime factorization $p_1^{e_1} \cdot p_2^{e_2} \cdot \ldots \cdot p_k^{e_{\pi(B)}}$ of a B-smooth number can then be expressed be entirely expressed by the factor base and exponent vector $(e_1, e_2, \ldots, e_{\pi(B)})$.
+
+Since a prime $p$ only divides $q(r_i)$ if and only if it divides $q(r_i+kp)$ for any integer
+$k$, we can found these values efficiently using a sieve. For this reason its called the $sieving step$ and because only primes $(\frac{n}{p_i}) = 1$ can divide $q(r_i)$, explains the definition of the factor base $P$. 
+Naivly one could simply randomly select $r$ in a range of interest and verify that $q(r)$ is divisable by all the primes in the factor base. Instead in quadratic sieve algorithm we can first solve the quadratic congruence $r^2 \equiv n$ (mod $p$) and then cleverly only divide by prime numbers corresponding to the interval $r$ and $r+kp$ for some any integer $k$. Thus, finding these $r$'s becomes easier than just a simple trail division as we apriori know at that a B-smooth $q(r_i)$ is divisable by a subset of primes in $P$. This is the reason why trail division of B-smooth numbers preferable over is a plain naive trail division.
+
+Then the product of subsequence of $x$ i.e. $q(x_1) \cdot q(x_2) \cdot \ldots \cdot q(x_k)$ produced a 
+square $iff$ the exponent vectors has only even entries. That is that it's the \emph{null}-vector in mod 2
+space. So with the collection of smooth numbers we want to form their exponent vectors, reduce them modulo 2. For that vector space (finite field of two elements) the sequence of vectors thus becomes linearly dependent and can be solved with Gaussian Eliminatio to find the non-empty subsequences. The exponent vectors is represented as the rows of a matrix. Hence, the column sums must be even.
+
+\subsection{Deciding on factor base}
+To factorize during the sieving step we want all the $q(r)$'s to be smooth in respect
+to the factore base, i.e. $q(r)$ must be divisable by only primes in the factor base.
+If a prime $p$ divides $q(r_i)$ earlier mentioned polynomial implies following
+
+\begin{equation}
+(r_i + \myfloor{\sqrt{n}})^2 \equiv n \ \texttt{mod} \ p_i
+\end{equation}
+
+Hence, $n$ is a quadratic residue modulo $p_i$ and we only need to consider those primes. Thus the set of primes $p_i$ for which the Legendre symbol $(\frac{n}{p_i})$ is 1 will form the factor base.
