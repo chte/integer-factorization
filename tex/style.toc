@@ -10,7 +10,8 @@
 \contentsline {subsection}{\numberline {III.2}Pollard's Rho}{4}{subsection.3.2}
 \contentsline {section}{\numberline {IV}Quadratic Sieve}{4}{section.4}
 \contentsline {subsection}{\numberline {IV.1}Brief explaination}{4}{subsection.4.1}
+\contentsline {subsection}{\numberline {IV.2}Brief explaination}{5}{subsection.4.2}
 \contentsline {section}{\numberline {V}Implementation}{5}{section.5}
 \contentsline {section}{\numberline {VI}Results}{5}{section.6}
 \contentsline {section}{\numberline {VII}Discussion}{5}{section.7}
-\contentsline {section}{\numberline {VIII}Conclusion}{5}{section.8}
+\contentsline {section}{\numberline {VIII}Conclusion}{6}{section.8}
