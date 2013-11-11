@@ -15,3 +15,8 @@ We can write $N = p * q$, when $x$, which iterates twice as fast as $y$, catches
 The figure above illustrates the Pollard's Rho cycle. The mapping of $x_{i+1}$ is instead replaced with a function $x^2+1$ so that we get $x^2_{i}+1$  $mod$ $N$ the factor $p$ will be found after $O(\sqrt{p})$  $\epsilon$ $O(N^{1/4})$ steps. \cite{avalg}\\
 
 Pollard's rho algorithm can be improved further by implementing Brent's cycle finding method. \cite{brent}
+
+\subsection{Miller-Rabin primality test}
+Miller-Rabin primality test is a probabalistics algorithm which determines if the given input $N$ is a prime. It is based on the properties of strong pseudoprimes, given an integer $N$, $N = 2^r * s + 1$ where $s$ is odd you choose a random number $a$ with the properties $1 \leq a \leq N - 1$. When $a^s \equiv 1$ $mod$ $N$ or $a^{2js} \equiv - 1$ $mod$ $N$ where $0 \leq j \leq r - 1$, if the input number $N$ is a prime it will pass the test with any random number $a$.
+
+Since Miller-Rabin is a probabalistics method it is not completely true that $N$ is a prime simply by passing the test, however the probability that the answer is true when $N$ is a composite number is $1 / 4^{N}$ which grows quickly with $N$. It can be considered a very small trade-off to use a probabalistics method because the algorithm executes at $O(k log^3 N$ where $k$ is the number of different values of $a$ tested. \cite{miller}
