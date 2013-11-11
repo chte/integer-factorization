@@ -4,8 +4,28 @@ This report will cover the work of a integer factorization program written in th
 The goal of the program is to be able to factorize integers in an efficient way and also pass KATTIS test cases with as high score as possible, this is done by improving the program step-by-step and gradually increasing the performance and intelligence in the task at hand. In the report the methods used will be analyzed described. How they work independently and their correlation in our implementation.
 
 \subsection{Problem}
-An unknown set of 100 integers in varying size are used as input to the algorithm from KATTIS. The output is either the factors of the input if it is solved or the string fail otherwise. One of the problems is dealing with large integers within the timeframe but also finding every single non-trivial factor. The restrictions in kattis are 15 seconds and 64MB of memory.
+An unknown set of 100 integers in varying size are used as input to the algorithm from KATTIS. The output is either the factors of the input if it is solved or the string fail otherwise. If number $n_i = p_1^{k_1} \ldots p_m^{k_m}$, then the program should print the following on \texttt{stdout}.
+\begin{align*}
+&\left.\begin{aligned}
+      &p_1 \\
+      &p_1 \\
+      &\vdots \\
+      &p_1 
+      \end{aligned}
+\right\}
+\qquad k_1 \text{ times} \\
+&\vdots \\
+&\left.\begin{aligned}
+      &p_m \\
+      &p_m \\
+      &\vdots \\
+      &p_m 
+      \end{aligned}
+\right\}
+\qquad k_m \text{ times}
+\end{align*}
 
+One of the problems is dealing with large integers within the timeframe but also finding every single non-trivial factor. The restrictions in kattis are 15 seconds and 64MB of memory.
 \subsection{Scope}
 There is no intention of reinventing any methods that already exists, the idea is to create a solver that can factorize unknown integers and in the end get a high score on KATTIS.
 

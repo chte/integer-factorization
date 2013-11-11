@@ -67,3 +67,39 @@ If a prime $p$ divides $q(r_i)$ earlier mentioned polynomial implies following
 \end{equation}
 
 Hence, $n$ is a quadratic residue modulo $p_i$ and we only need to consider those primes. Thus the set of primes $p_i$ for which the Legendre symbol $(\frac{n}{p_i})$ is 1 will form the factor base.
+
+
+\subsection{Sieving step}
+Only a small fraction of number will be completely factorized by the primes of
+the factor base. Therefore, a crucial step is to sieve as many numbers as possible.
+From following observation we can decide on intervals of primes in $P$ that
+to divide prime numbers of $q(r)$.
+
+\begin{align}
+q(r) &= \tilde{r}^2 - n, \ \tilde{r} = (\myfloor{\sqrt{n}} + r) \\
+q(r+kp) &= (\tilde{r}+kp)^2-n \\
+q(r+kp) &= \tilde{r}^2 + 2 \ \tilde{r}kp + (kp)^2 - n \\
+q(r+kp) &= q(r) + 2\tilde{r}kp + (kp)^2 \\
+		&\equiv q(r) \imod{p}
+\end{align}
+
+So the solution $q(r) \equiv 0 {p}$ for $r_i$ yields a sequence $q(r_i)$ 
+that is divisable by $p$, thus sieving will find many factorizable numbers
+in the defined factor base.
+
+\paragraph{Gauss-eliminering}
+
+När tillräckligt många användbara $x_i$ och $f(x_i)$ har påträffats återstår det
+bara att pröva olika linjärkombinationer av dessa som ger jämna kvadrater för
+produkten av $f(x_i), i \in [1,k]$. För att vara säkra på att ett linjärt
+beroende existerar behöver vi samla in ett mer $r$ än antalet primtal i
+faktorbasen. 
+
+Att hitta sådana linjärkombinationer kan göras genom att bilda matrisen $A$ med
+radvektorer så som exponenterna för primtalen i faktorbasen för vart och ett av
+de utvalda $x_i$:na, räknat modulo 2. Uppgiften blir sedan att finna nollrummet
+för $A^T$, vilket görs enklast med Gauss-eliminering.
+
+Härifrån återstår endast att pröva de jämn-kvadrat-bildande linjärkombinationer
+av $x_i$ och $y_i$ som nollrummet medger tills en icke-trivial lösning hittas
+med hjälp av \emph{gcd}.
