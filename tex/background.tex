@@ -1,14 +1,33 @@
-As described in the scope the intention is not to find a new method of factoring integers but instead use existing methods and implement them in a intelligent way.
+The Integer Factorization problem is defined as follows; given a composite integer $n$, find any non-trivial factor $e$ of $n$, such that $e|n$. At first it might seem like a trivial task, but for large integers this has proven to be a very difficult task.
 
 \subsection{Trial Division}
-Trial division is an easy implemented algorithm for finding factors to $N$. Like its name suggests it uses tries to divide $N$ by using a $x > 2$. If the remainder of $N/x = 0$ the factor is a non-trivial factor, if we cannot find a divisor $x$ that gives the remainder $0$ then $N$ is a prime.
+ The most straight-forward approach to factoring composite numbers is \emph{trail division}, which essentially (just like its name suggests) just check for every prime number $p \leq \sqrt{n}$ if $p|n$. 
 
-The restrictions for the algorithm are easy to find and improve, $N > 1$ and $x > 2$. This can be improved by saying that $N > x$ and since the factors of N cannot be larger than $\sqrt{N}$ we can also say that $\sqrt{N} > x > 2$. Another improvement is to only do tests when $x$ is a prime number. Although trial division is easy to implement and guaranteed to grant an answer it is not efficient for large a $N$.
+Improvement is to only do tests when $p$ is a prime number, i.e. keep a list of precomputed prime numbers. Although trial division is easy to implement and guaranteed to grant an answer it is not efficient with large integers. There is improvements that can be applied such as storing a precomputed tables of primes to bring up the speed. However, this instead requires alot of memory during run-time as well as storage, when dealing with larger integers. A
 
-\subsection{Pollard's Rho}
-Pollard rho is a prime factorization algorithm which is based on Floyd’s cycle-finding algorithm. The idea of pollard rho algorithm is to iterate a formula until it falls into a cycle. We want to find a $x$ and $y$ where the $x$ makes twice as many iterations as the $y$ using a function $modulo N$ as a generator of a pseudo-random sequence. The $GCD|x - y|$ of $N$ is taken each step, and the GCD reaches $N$ we have not found an answer and the algorithm terminates with a failure.
+\subsection{Pollard's $\rho$}
+In 1975 John M. Pollard proposed a new and very efficient Monte Carlo algorithm for factoring integers, now known as Pollard's $\rho$ (rho) method.
+It was a break through and proved to be alot more faster than its predecessor trial division for finding small non-trivial factors of a large integer $n$.
 
-We can write $N = p * q$, when $x$, which iterates twice as fast as $y$, catches up with $y$ which will happen eventually, at this point factor $p$ will be found. The time it will take cannot be proven matematically and can only be proven by heuristics. If the sequence behaves randomly it would take approximately p steps to find p, which is not very effcient. \cite{avalg} \\
+\subsubsection{Basic idea}
+Pollard's $p$ basic concept is that a sequence of pseudo-random integers constructed as
+
+\begin{equation}
+x_0 = \texttt{rand}(0,\ n-1) 
+\end{equation}
+
+\begin{equation}
+x_i = f(x_{i-1}) \ (\texttt{mod} \ n), \ \texttt{for} \ i = 1, 2, \ldots
+\end{equation}
+
+where $f$ is polynomial which in most practical implementations has the form $f(x) = x^2 + \alpha, \alpha \neq 0, -2$.
+The key observation that if we consider a non-trivial divisor of $n$, say $d$, that is small compared to $n$. Then there exists smaller congruence
+groups modulo $d$ compared to $n$. Because of this there is a probability that there exists two $x_i$ and $x_j$ such that $x_i \equiv x_j$ (mod $d$),
+while $x_i \not\equiv x_j$ (mod $n$). Thus it follows from that gcd$(x_i - x_j, n)$ is a non-trivial factor of $n$.
+
+The idea of pollard rho algorithm is to iterate a formula until it falls into a cycle. We want to find a $x$ and $y$ whereas the $x$ makes twice as many iterations as the $y$ using a function (mod $n$) as a generator of a pseudo-random sequence. The $gcd(x - y, n)$ is taken each step, and it reaches $n$ we have not found an answer and the algorithm terminates with a failure.
+
+We can write $n = p \cdot q$, when $x$, which iterates twice as fast as $y$, catches up with $y$ which will happen eventually, at this point factor $p$ will be found. The time it will take cannot be proven matematically and can only be proven by heuristics. If the sequence behaves randomly it would take approximately p steps to find p, which is not very effcient. \cite{avalg} 
 
 \includegraphics[scale = 0.5]{pollards.png}
 
