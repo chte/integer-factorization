@@ -21,8 +21,7 @@
 \contentsline {section}{\numberline {V}Implementation}{8}{section.5}
 \contentsline {section}{\numberline {VI}Results}{8}{section.6}
 \contentsline {paragraph}{Primality testing}{8}{paragraph*.4}
-\contentsline {paragraph}{Quadratic sieve}{8}{paragraph*.6}
-\contentsline {paragraph}{Primality testing}{9}{paragraph*.8}
+\contentsline {paragraph}{Quadratic sieve}{8}{paragraph*.5}
 \contentsline {subsection}{\numberline {VI.1}Kattis submission}{9}{subsection.6.1}
 \contentsline {section}{\numberline {VII}Discussion}{9}{section.7}
 \contentsline {section}{\numberline {VIII}Conclusion}{9}{section.8}

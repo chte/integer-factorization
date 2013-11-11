@@ -1,2 +1,29 @@
-These tests were solely based on the score and running time on  the 
+These tests were solely based on the score and running time on the 
 \texttt{KATTIS} problem \texttt{oldkattis:factoring}.
+
+\paragraph{Primality testing}
+At first we just tried to do a primality test with Miller-Rabin. 
+The results can be seen in table
+
+ \textbf{Score} 1   \textbf{Running time} 0.01s 
+                          
+
+\paragraph{Quadratic sieve}
+
+We implemented a naive Quadratic Sieve from start and
+at first with bad B smooth boundary. It had
+unoptmizied sieving functions, we did handle perfect powers.
+
+This yielded a result on Kattis as shown below.
+
+ \textbf{Score} 85   \textbf{Running time} 13.56s 
+                          
+
+By improving on the problems mentioned above and tweaking the smoothness boundary
+B which regulates the factor base size aswell as the number of linear relations,
+i.e how many extra smooth numbers, we managed to get 100 points score on Kattis.
+
+ \textbf{Score} 100   \textbf{Running time} 4.32s 
+
+\subsection{Kattis submission}
+The best Kattis submission has the ID:459013.

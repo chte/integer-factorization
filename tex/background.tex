@@ -25,21 +25,80 @@ The key observation that if we consider a non-trivial divisor of $n$, say $d$, t
 groups modulo $d$ compared to $n$. Because of this there is a probability that there exists two $x_i$ and $x_j$ such that $x_i \equiv x_j$ (mod $d$),
 while $x_i \not\equiv x_j$ (mod $n$). Thus it follows from that gcd$(x_i - x_j, n)$ is a non-trivial factor of $n$.
 
-The idea of pollard rho algorithm is to iterate a formula until it falls into a cycle. We want to find a $x$ and $y$ whereas the $x$ makes twice as many iterations as the $y$ using a function (mod $n$) as a generator of a pseudo-random sequence. The $gcd(x - y, n)$ is taken each step, and it reaches $n$ we have not found an answer and the algorithm terminates with a failure.
+The idea of Pollard $\rho$ algorithm is to iterate this formula until it falls into a cycle. We want to find a $x$ and $y$ whereas the $x$ makes twice as many iterations as the $y$ using the $f(x)$ (mod $n$) as a generator of a pseudo-random sequence. The $gcd(x - y, n)$ is taken each step, and it reaches $n$ we have not found an answer and the algorithm terminates with a failure.
 
 We can write $n = p \cdot q$, when $x$, which iterates twice as fast as $y$, catches up with $y$ which will happen eventually, at this point factor $p$ will be found. The time it will take cannot be proven matematically and can only be proven by heuristics. If the sequence behaves randomly it would take approximately p steps to find p, which is not very effcient. \cite{avalg} 
 
-\includegraphics[scale = 0.5]{pollards.png}
 
-The figure above illustrates the Pollard's Rho cycle. The mapping of $x_{i+1}$ is instead replaced with a function $x^2+1$ so that we get $x^2_{i}+1$  $mod$ $N$ the factor $p$ will be found after $O(\sqrt{p})$  $\epsilon$ $O(N^{1/4})$ steps. \cite{avalg}\\
+\includegraphics[scale = 0.5]{pollards.png}
+Illustration of the Pollard's Rho cycle. The mapping of $x_{i+1}$ is instead replaced with a function $x^2+1$ so that we get $x^2_{i}+1$  (mod $n$) the factor $p$ will be found after $O(\sqrt{p})$  $\epsilon$ $O(n^{1/4})$ steps. \cite{avalg}
+
+\paragraph{Pollard $\rho$ algorithm}
+\begin{algorithmic}
+    \STATE pollards $\rho$($n$, $X_0$)
+        \STATE $a \gets X_0 $
+        \STATE $b \gets X_0 $
+
+        \WHILE{$ factor = 1$}
+            \STATE $a \gets f(a)$
+            \STATE $b \gets f(f(b))$
+            \STATE $factor \gets gcd(|a-b|, n)$
+        \ENDWHILE
+
+        \IF{$factor = n$}
+            \STATE \COMMENT{print 'fail'}
+            \RETURN $-1$ 
+        \ELSIF{$factor > 1$}
+            \RETURN $factor$
+        \ENDIF
+\end{algorithmic}
 
 Pollard's rho algorithm can be improved further by implementing Brent's cycle finding method. \cite{brent}
 
-\subsection{Miller-Rabin primality test}
-Miller-Rabin primality test is a probabalistics algorithm which determines if the given input $N$ is a prime. It is based on the properties of strong pseudoprimes, given an integer $N$, $N = 2^r * s + 1$ where $s$ is odd, you choose a random number $a$ with the properties $1 \leq a \leq N - 1$. When $a^s \equiv 1$ $mod$ $N$ or $a^{2js} \equiv - 1$ $mod$ $N$ where $0 \leq j \leq r - 1$, if the input number $N$ is a prime it will pass the test with any random number $a$.
+\subsubsection{Optimizating with Brent}
 
-<<<<<<< HEAD
-Since Miller-Rabin is a probabalistics method it is not completely true that $N$ is a prime simply by passing the test, however the probability that the answer is true when $N$ is a composite number is $1 / 4^{N}$ which grows quickly with $N$. It can be considered a very small trade-off to use a probabalistics method because the algorithm executes at $O(k$ $log^3 N)$ where $k$ is the number of different values of $a$ tested. \cite{miller}
-=======
-Since Miller-Rabin is a probabalistics method it is not completely true that $N$ is a prime simply by passing the test, however the probability that the answer is true when $N$ is a composite number is $1 / 4^{N}$ which grows quickly with $N$. It can be considered a very small trade-off to use a probabalistics method because the algorithm executes at $O(k$ $log^3 N)$ where $k$ is the number of different values of $a$ tested. \cite{miller}
->>>>>>> 74c414c56f71a8c92c08abd685ce1136c9b650a6
+\paragraph{Brent's algorithm}
+The idea behind the optimization is to only perform one function call to $f(x)$ in every iteration, instead of three. 
+This can be achieved by using Brent's method to find cycle instead of Floyd's.
+
+Floyd's algorithm to find cycles lets $b$ make twice as many iterations than $a$, i.e. moving twice as fast. Instead
+Brent's algorithm is trying to find the smallest power of two that is larger than the length of the cycle.
+
+\begin{algorithmic}
+    \STATE pollards $\rho$ ($n$, $X_0$)
+        \STATE $power \gets 1$
+        \STATE $iterations \gets 1$
+
+        \WHILE{$ factor = 1$}
+            \FOR {$i = 0$ to $iterationer per gcd$}
+                \IF {$power = iterations$}
+                    \STATE $a \gets b$
+                    \STATE $power \gets power *2$
+                    \STATE $iterations \gets 0$
+                \ENDIF 
+                \STATE $b \gets f(b)$
+
+                \STATE $iterations \gets iterations + 1$
+
+                \STATE $factor \gets factor * |a-b|$
+            
+            \ENDFOR
+
+
+            \STATE $factor = gcd(factor, n)$
+        \ENDWHILE
+
+        \IF{$factor = n$}
+            \STATE \COMMENT {try new start value}
+            \RETURN pollards rho($n$, $X_0+1$) 
+        \ELSIF{$factor > 1$}
+            \RETURN $factor$
+        \ENDIF
+\end{algorithmic}
+
+
+
+\subsection{Miller-Rabin primality test}
+Miller-Rabin primality test is a probabalistics algorithm which determines if the given input $n$ is a prime. It is based on the properties of strong pseudoprimes, given an integer $n$, $n = 2^r * s + 1$ where $s$ is odd, you choose a random number $a$ with the properties $1 \leq a \leq n - 1$. When $a^s \equiv 1$ (mod $n$) or $a^{2js} \equiv - 1$ (mod $n$) where $0 \leq j \leq r - 1$, if the input number $n$ is a prime it will pass the test with any random number $a$.
+
+Since Miller-Rabin is a probabalistics method it is not completely true that $n$ is a prime simply by passing the test, however the probability that the answer is true when $n$ is a composite number is $1 / 4^{n}$ which grows quickly with $n$. It can be considered a very small trade-off to use a probabalistics method because the algorithm executes at $O(k$ $log^3 n)$ where $k$ is the number of different values of $a$ tested. \cite{miller}
