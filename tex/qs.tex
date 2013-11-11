@@ -15,7 +15,8 @@ Furthermore it can be rewritten as $(x-y) \cdot (x+y) = k \cdot p \cdot q$ for s
 \end{itemize}
 
 Hence, the greatest common divisor of ($x-y,n$) and ($x+y,n$) would in first case yield $p$ or $q$ and a non-trivial factor of 
-$n$ is found. In the second case we get $n$ or $1$ and trivial solution is found. 
+$n$ is found. In the second case we get $n$ or $1$ and trivial solution is found. There is atleast $1/2$ probabilty of 
+the solution being non-trivial\cite{Pomerance1985}.
 
 Carl Pomerance suggested a method to find such squares\cite{Pomerance1985}. The first step in doing so is to is to define the polynomial 
 \begin{equation}
@@ -66,11 +67,11 @@ If a prime $p$ divides $q(r_i)$ earlier mentioned polynomial implies following
 (r_i + \myfloor{\sqrt{n}})^2 \equiv n \ \texttt{mod} \ p_i
 \end{equation}
 
-Hence, $n$ is a quadratic residue modulo $p_i$ and we only need to consider those primes. Thus the set of primes $p_i$ for which the Legendre symbol $(\frac{n}{p_i})$ is 1 will form the factor base.
+Hence, $n$ is a quadratic residue modulo $p_i$ and we only need to consider those primes. Thus the set of primes $p_i$ for which the Legendre symbol $(\frac{n}{p_i})$ is 1 will form the factor base\cite{Pomerance1985}.
 
 
 \subsection{Sieving step}
-Only a small fraction of number will be completely factorized by the primes of
+Only a small fraction of numbers will be completely factorized by the primes of
 the factor base. Therefore, a crucial step is to sieve as many numbers as possible.
 From following observation we can decide on intervals of primes in $P$ that
 to divide prime numbers of $q(r)$.
@@ -84,22 +85,48 @@ q(r+kp) &= q(r) + 2\tilde{r}kp + (kp)^2 \\
 \end{align}
 
 So the solution $q(r) \equiv 0 {p}$ for $r_i$ yields a sequence $q(r_i)$ 
-that is divisable by $p$, thus sieving will find many factorizable numbers
-in the defined factor base.
+that is divisable by $p$. This can be solved using Shanks-Tonelli
+algorithm\cite{Pomerance1985}. Thus we obtain two solutions which we call $idx_{1p}$
+and $idx_{2p} = p - idx_{1p}$. Then those $q(r_i)$ with $r_i$'s
+in the sieving interval are divisable by $p$ when $r_i = idx_{1p}, idx_{2p}+pk$
+for some integer $k$.
 
-\paragraph{Gauss-eliminering}
+\paragraph{Gauss-eliminatio}
+If $q(r_i)$ does completely factor, the next step is to
+test different linear combination of these so that it yields perfect square for 
+product of $q(r_i), i \in [1,k]$. In other words we want to find solutions to
 
-När tillräckligt många användbara $x_i$ och $f(x_i)$ har påträffats återstår det
-bara att pröva olika linjärkombinationer av dessa som ger jämna kvadrater för
-produkten av $f(x_i), i \in [1,k]$. För att vara säkra på att ett linjärt
-beroende existerar behöver vi samla in ett mer $r$ än antalet primtal i
-faktorbasen. 
+\begin{equation}
+q(r_1)e_1 + q(r_2)e_2 + \ldots + q(r_k)e_k
+\end{equation}
 
-Att hitta sådana linjärkombinationer kan göras genom att bilda matrisen $A$ med
-radvektorer så som exponenterna för primtalen i faktorbasen för vart och ett av
-de utvalda $x_i$:na, räknat modulo 2. Uppgiften blir sedan att finna nollrummet
-för $A^T$, vilket görs enklast med Gauss-eliminering.
+where $e_i$ is either 0 or 1. This means that if $\vec{a}_i$ is the
+row in a matrix $A$ corresponding to $q(r_i)$ then we get
 
-Härifrån återstår endast att pröva de jämn-kvadrat-bildande linjärkombinationer
-av $x_i$ och $y_i$ som nollrummet medger tills en icke-trivial lösning hittas
-med hjälp av \emph{gcd}.
+\begin{equation}
+\vec{a}_1 e_1 + \vec{a}_2 e_2 + \ldots + \vec{a}_k e_k
+\end{equation}
+
+and we have to solve 
+
+\begin{equation}
+\vec{e}_1 A^T = \vec{0} \ (\texttt{mod} N)
+\end{equation}
+
+where $\vec{e}$ is the exponent vector. Then the task simply becomes to find the 
+null-space of $A^T$, with Gauss Elimination in the field $GF[2]$ so that all calculations 
+can be made modulo $2$.
+
+To ensure linear dependancy there have to be more B-smooth numbers $r$ than the number of primes 
+in the factor base. We want to produce linear combination so that each prime power in the combination is even, 
+only then we have a perfect square. 
+
+From this stage what remains is to try combinations until we have
+a solution of linear combinations yielding a product that is perfect square,
+with equation (7) and (8). To ensure that $x$ and $y$ are not trivial solutions
+we can make use of equation (1) and check the requirement $x \not\equiv \pm y$ (mod $n$),
+since there is otherwise a $1/2$ probability of gcd($x-y,n$) resulting in a 
+trivial solution. If a trivial solution is found we just rerun and try another linear
+combination until we find a non-trivial one.
+
+

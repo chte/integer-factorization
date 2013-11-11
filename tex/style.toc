@@ -5,14 +5,24 @@
 \contentsline {subsection}{\numberline {I.3}Scope}{3}{subsection.1.3}
 \contentsline {subsection}{\numberline {I.4}Statement of Collaboration}{3}{subsection.1.4}
 \contentsline {section}{\numberline {II}Preliminaries}{3}{section.2}
-\contentsline {section}{\numberline {III}Background}{3}{section.3}
-\contentsline {subsection}{\numberline {III.1}Trial Division}{3}{subsection.3.1}
-\contentsline {subsection}{\numberline {III.2}Pollard's Rho}{4}{subsection.3.2}
-\contentsline {subsection}{\numberline {III.3}Miller-Rabin primality test}{4}{subsection.3.3}
-\contentsline {section}{\numberline {IV}Quadratic Sieve}{5}{section.4}
-\contentsline {subsection}{\numberline {IV.1}Brief explaination}{5}{subsection.4.1}
-\contentsline {subsection}{\numberline {IV.2}Deciding on factor base}{6}{subsection.4.2}
-\contentsline {section}{\numberline {V}Implementation}{6}{section.5}
-\contentsline {section}{\numberline {VI}Results}{6}{section.6}
-\contentsline {section}{\numberline {VII}Discussion}{6}{section.7}
-\contentsline {section}{\numberline {VIII}Conclusion}{7}{section.8}
+\contentsline {section}{\numberline {III}Background}{4}{section.3}
+\contentsline {subsection}{\numberline {III.1}Trial Division}{4}{subsection.3.1}
+\contentsline {subsection}{\numberline {III.2}Pollard's $\rho $}{4}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {III.2.1}Basic idea}{4}{subsubsection.3.2.1}
+\contentsline {paragraph}{Pollard $\rho $ algorithm}{5}{paragraph*.1}
+\contentsline {subsubsection}{\numberline {III.2.2}Optimizating with Brent}{5}{subsubsection.3.2.2}
+\contentsline {paragraph}{Brent's algorithm}{5}{paragraph*.2}
+\contentsline {subsection}{\numberline {III.3}Miller-Rabin primality test}{5}{subsection.3.3}
+\contentsline {section}{\numberline {IV}Quadratic Sieve}{6}{section.4}
+\contentsline {subsection}{\numberline {IV.1}Brief explaination}{6}{subsection.4.1}
+\contentsline {subsection}{\numberline {IV.2}Deciding on factor base}{7}{subsection.4.2}
+\contentsline {subsection}{\numberline {IV.3}Sieving step}{7}{subsection.4.3}
+\contentsline {paragraph}{Gauss-eliminatio}{8}{paragraph*.3}
+\contentsline {section}{\numberline {V}Implementation}{8}{section.5}
+\contentsline {section}{\numberline {VI}Results}{8}{section.6}
+\contentsline {paragraph}{Primality testing}{8}{paragraph*.4}
+\contentsline {paragraph}{Quadratic sieve}{8}{paragraph*.6}
+\contentsline {paragraph}{Primality testing}{9}{paragraph*.8}
+\contentsline {subsection}{\numberline {VI.1}Kattis submission}{9}{subsection.6.1}
+\contentsline {section}{\numberline {VII}Discussion}{9}{section.7}
+\contentsline {section}{\numberline {VIII}Conclusion}{9}{section.8}
