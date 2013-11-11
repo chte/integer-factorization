@@ -21,3 +21,6 @@
 *.log
 *.bbl
 *.blg
+*.synctex.gz(busy)
+*.synctex.gz
+*.txt

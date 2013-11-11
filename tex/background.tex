@@ -38,4 +38,8 @@ Pollard's rho algorithm can be improved further by implementing Brent's cycle fi
 \subsection{Miller-Rabin primality test}
 Miller-Rabin primality test is a probabalistics algorithm which determines if the given input $N$ is a prime. It is based on the properties of strong pseudoprimes, given an integer $N$, $N = 2^r * s + 1$ where $s$ is odd, you choose a random number $a$ with the properties $1 \leq a \leq N - 1$. When $a^s \equiv 1$ $mod$ $N$ or $a^{2js} \equiv - 1$ $mod$ $N$ where $0 \leq j \leq r - 1$, if the input number $N$ is a prime it will pass the test with any random number $a$.
 
+<<<<<<< HEAD
 Since Miller-Rabin is a probabalistics method it is not completely true that $N$ is a prime simply by passing the test, however the probability that the answer is true when $N$ is a composite number is $1 / 4^{N}$ which grows quickly with $N$. It can be considered a very small trade-off to use a probabalistics method because the algorithm executes at $O(k$ $log^3 N)$ where $k$ is the number of different values of $a$ tested. \cite{miller}
+=======
+Since Miller-Rabin is a probabalistics method it is not completely true that $N$ is a prime simply by passing the test, however the probability that the answer is true when $N$ is a composite number is $1 / 4^{N}$ which grows quickly with $N$. It can be considered a very small trade-off to use a probabalistics method because the algorithm executes at $O(k$ $log^3 N)$ where $k$ is the number of different values of $a$ tested. \cite{miller}
+>>>>>>> 74c414c56f71a8c92c08abd685ce1136c9b650a6
